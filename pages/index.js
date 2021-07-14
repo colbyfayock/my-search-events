@@ -16,14 +16,27 @@ export default function Home({ people }) {
   }, []);
 
   useEffect(() => {
-    document.body.addEventListener('keydown', onKeyDown);
+    if ( hasResults ) {
+      document.body.addEventListener('keydown', onKeyDown);
+    } else {
+      document.body.removeEventListener('keydown', onKeyDown);
+    }
     return () => {
       document.body.removeEventListener('keydown', onKeyDown);
     }
-  }, []);
+  }, [hasResults]);
 
   function onKeyDown(event) {
-    console.log(event);
+    const isUp = event.key === 'ArrowUp';
+    const isDown = event.key === 'ArrowDown';
+
+    if ( isUp ) {
+      console.log('Going up!')
+    }
+
+    if ( isDown ) {
+      console.log('Going down!')
+    }
   }
 
   /**
