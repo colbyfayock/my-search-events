@@ -15,6 +15,17 @@ export default function Home({ people }) {
     inputRef.current.focus();
   }, []);
 
+  useEffect(() => {
+    document.body.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.removeEventListener('keydown', onKeyDown);
+    }
+  }, []);
+
+  function onKeyDown(event) {
+    console.log(event);
+  }
+
   /**
    * handleOnChange
    */
