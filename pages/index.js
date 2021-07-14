@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
@@ -8,6 +8,12 @@ export default function Home({ people }) {
 
   const results = people.filter(({ name }) => query && name.toLowerCase().includes(query.toLowerCase()) );
   const hasResults = results && results.length > 0;
+
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
 
   /**
    * handleOnChange
@@ -30,7 +36,7 @@ export default function Home({ people }) {
           SWAPI People Search
         </h1>
         <form className={styles.form} method="post" autoComplete="off">
-          <input type="search" name="query" onChange={handleOnChange} />
+          <input ref={inputRef} type="search" name="query" onChange={handleOnChange} />
           {hasResults && (
             <div className={styles.autocomplete}>
               <ul className={styles.people}>
