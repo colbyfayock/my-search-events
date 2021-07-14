@@ -10,6 +10,7 @@ export default function Home({ people }) {
   const hasResults = results && results.length > 0;
 
   const inputRef = useRef();
+  const resultsRef = useRef();
 
   useEffect(() => {
     inputRef.current.focus();
@@ -29,13 +30,34 @@ export default function Home({ people }) {
   function onKeyDown(event) {
     const isUp = event.key === 'ArrowUp';
     const isDown = event.key === 'ArrowDown';
+    const inputIsFocused = document.activeElement === inputRef.current;
+
+    const resultsItems = Array.from(resultsRef.current.children)
+
+    const activeResultIndex = resultsItems.findIndex(child => {
+      return child.querySelector('a') === document.activeElement;
+    });
 
     if ( isUp ) {
-      console.log('Going up!')
+      console.log('Going up!');
+      if ( inputIsFocused ) {
+        resultsItems[resultsItems.length - 1].querySelector('a').focus();
+      } else if ( resultsItems[activeResultIndex - 1] ) {
+        resultsItems[activeResultIndex - 1].querySelector('a').focus();
+      } else {
+        inputRef.current.focus();
+      }
     }
 
     if ( isDown ) {
       console.log('Going down!')
+      if ( inputIsFocused ) {
+        resultsItems[0].querySelector('a').focus();
+      } else if ( resultsItems[activeResultIndex + 1] ) {
+        resultsItems[activeResultIndex + 1].querySelector('a').focus();
+      } else {
+        inputRef.current.focus();
+      }
     }
   }
 
@@ -63,7 +85,7 @@ export default function Home({ people }) {
           <input ref={inputRef} type="search" name="query" onChange={handleOnChange} />
           {hasResults && (
             <div className={styles.autocomplete}>
-              <ul className={styles.people}>
+              <ul ref={resultsRef} className={styles.people}>
                 {results.map(result => {
                   return (
                     <li key={result.url}>
