@@ -1,6 +1,6 @@
 # Listening to Browser Events in React
 
-Demo for tutorial [How to Use Browser Event Listeners in React for Search and Autocomplete](https://spacejelly.dev/posts/how-to-use-browser-event-listeners-in-react-for-search-autocomplete-in-javascript/)
+Demo for tutorial [How to Use Browser Event Listeners in React for Search and Autocomplete](https://www.youtube.com/watch?v=1vOeRDYKb0g)
 
 📝 Article: https://spacejelly.dev/posts/how-to-use-browser-event-listeners-in-react-for-search-autocomplete-in-javascript/
 
